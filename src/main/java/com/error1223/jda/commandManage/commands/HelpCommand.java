@@ -27,27 +27,26 @@ public class HelpCommand implements ICommand {
             StringBuilder builder = new StringBuilder();
             this.manager.getCommands().stream().map(ICommand::getName).forEach((it) -> builder.append('`').append(Config.get("prefix")).append(it).append("`\n"));
 
-            info.setColor(16777215);
+            info.setColor(0xFFFFFF);
             info.setTitle("List of commands\n");
             info.setDescription(builder.toString());
             channel.sendMessage(info.build()).queue();
+            return;
         }
 
         String search = args.get(0);
         ICommand command = this.manager.getCommand(search);
 
         if (command == null) {
-
             channel.sendMessage("Nothing found for " + search).queue();
-
-        } else {
-
-            EmbedBuilder info = new EmbedBuilder();
-            info.setTitle(Config.get("prefix") + command.getName());
-            info.setDescription(command.getHelp());
-            channel.sendMessage(info.build()).queue();
-            info.clear();
+            return;
         }
+
+        EmbedBuilder info = new EmbedBuilder();
+        info.setTitle(Config.get("prefix") + command.getName());
+        info.setDescription(command.getHelp());
+        channel.sendMessage(info.build()).queue();
+        info.clear();
     }
 
     public String getName() {

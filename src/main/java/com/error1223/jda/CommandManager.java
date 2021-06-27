@@ -1,10 +1,19 @@
 package com.error1223.jda;
 
-import com.error1223.jda.commandManage.CommandContext;
-import com.error1223.jda.commandManage.ICommand;
-import com.error1223.jda.commandManage.commands.HelpCommand;
-import com.error1223.jda.commandManage.commands.PingCommand;
-import com.error1223.jda.commandManage.commands.RollCommand;
+import com.error1223.jda.commands.admin.SetPrefixCommand;
+import com.error1223.jda.commands.entertainment.MemeCommand;
+import com.error1223.jda.commands.utilities.WebhookCommand;
+import com.error1223.jda.type.CommandContext;
+import com.error1223.jda.type.ICommand;
+import com.error1223.jda.commands.entertainment.HighLowCommand;
+import com.error1223.jda.commands.music.JoinCommand;
+import com.error1223.jda.commands.music.LeaveCommand;
+import com.error1223.jda.commands.music.PlayCommand;
+import com.error1223.jda.commands.utilities.HelpCommand;
+import com.error1223.jda.commands.connect.PasteCommand;
+import com.error1223.jda.commands.utilities.PingCommand;
+import com.error1223.jda.commands.entertainment.RollCommand;
+import com.error1223.jda.commands.admin.KickCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -18,14 +27,21 @@ public class CommandManager {
     private final List<ICommand> commands = new ArrayList<>();
     EmbedBuilder error = new EmbedBuilder();
 
-
     public CommandManager() {
         //list all the commands here
         addCommand(new PingCommand());
         addCommand(new HelpCommand(this));
         addCommand(new RollCommand());
+        addCommand(new PasteCommand());
+        addCommand(new KickCommand());
+        addCommand(new HighLowCommand());
+        addCommand(new PlayCommand());
+        addCommand(new JoinCommand());
+        addCommand(new LeaveCommand());
+        addCommand(new WebhookCommand());
+        addCommand(new MemeCommand());
+        addCommand(new SetPrefixCommand());
     }
-
     private void addCommand(ICommand cmd) {
         boolean nameFound = this.commands.stream().anyMatch((it) -> it.getName().equalsIgnoreCase(cmd.getName()));
 
@@ -55,9 +71,10 @@ public class CommandManager {
         return null;
     }
 
-    void handle(GuildMessageReceivedEvent event) {
+    void handle(GuildMessageReceivedEvent event, String prefix) {
         String[] split = event.getMessage().getContentRaw()
-                .replaceFirst("(?i)" + Pattern.quote(Config.get("prefix")), "").split("\\s+");
+                .replaceFirst("(?i)" + Pattern.quote(prefix), "")
+                .split("\\s+");
 
         String invoke = split[0].toLowerCase();
         ICommand cmd = this.getCommand(invoke);
@@ -72,7 +89,7 @@ public class CommandManager {
                 cmd.handle(ctx);
             } catch (Exception e) {
                 //no exception, therefore good code
-                cmdError(cmd.getName(), cmd.getUsage());
+                cmdError(cmd.getUsage());
                 event.getChannel().sendMessage(error.build()).queue();
                 error.clear();
             }
@@ -80,14 +97,12 @@ public class CommandManager {
 
     }
 
+
     //error message:
-    //❌Error please try again
-    //Correct usage: !<cmdName> <getUsage>
-    //please try again
-    void cmdError(String cmdName, String usage) {
+    void cmdError(String usage) {
         error.setColor(0xff0000);
         error.setTitle("❌Error please try again");
-        error.setDescription("Correct usage: `" + usage + "`\nplease try again");
+        error.setDescription("Correct usage: " + usage + "\nplease try again");
 
     }
 }

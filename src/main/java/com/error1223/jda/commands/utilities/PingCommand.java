@@ -1,12 +1,10 @@
-package com.error1223.jda.commandManage.commands;
+package com.error1223.jda.commands.utilities;
 
-import com.error1223.jda.commandManage.CommandContext;
-import com.error1223.jda.commandManage.ICommand;
-import java.util.List;
+import com.error1223.jda.type.CommandContext;
+import com.error1223.jda.type.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.requests.RestAction;
 
 public class PingCommand implements ICommand {
     public PingCommand() {
@@ -29,11 +27,11 @@ public class PingCommand implements ICommand {
     }
 
     public String getHelp() {
-        return "Shows the current ping from the bot to the discord servers\nUsage: `!ping`";
+        return "Shows the current ping from the bot to the discord servers";
     }
 
     public String getUsage() {
-        return "Usage: `!ping`";
+        return "`!ping`";
     }
 
 }

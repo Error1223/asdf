@@ -1,9 +1,9 @@
-package com.error1223.jda.commandManage.commands;
+package com.error1223.jda.commands.utilities;
 
 import com.error1223.jda.CommandManager;
 import com.error1223.jda.Config;
-import com.error1223.jda.commandManage.CommandContext;
-import com.error1223.jda.commandManage.ICommand;
+import com.error1223.jda.type.CommandContext;
+import com.error1223.jda.type.ICommand;
 
 import java.util.List;
 
@@ -25,11 +25,13 @@ public class HelpCommand implements ICommand {
         if (args.isEmpty()) {
             EmbedBuilder info = new EmbedBuilder();
             StringBuilder builder = new StringBuilder();
-            this.manager.getCommands().stream().map(ICommand::getName).forEach((it) -> builder.append('`').append(Config.get("prefix")).append(it).append("`\n"));
+            this.manager.getCommands().stream().map(ICommand::getName).forEach((it)
+                    -> builder.append("**"+Config.get("prefix")).append(it).append("**: `"+manager.getCommand(it).getHelp()).append("`\n"));
 
             info.setColor(0xFFFFFF);
             info.setTitle("List of commands\n");
             info.setDescription(builder.toString());
+            info.setFooter("!help <command name> for more details");
             channel.sendMessage(info.build()).queue();
             return;
         }
@@ -44,7 +46,7 @@ public class HelpCommand implements ICommand {
 
         EmbedBuilder info = new EmbedBuilder();
         info.setTitle(Config.get("prefix") + command.getName());
-        info.setDescription(command.getHelp());
+        info.setDescription(command.getHelp()+"\nUsage: "+command.getUsage());
         channel.sendMessage(info.build()).queue();
         info.clear();
     }
@@ -54,11 +56,11 @@ public class HelpCommand implements ICommand {
     }
 
     public String getHelp() {
-        return "Shows the list with commands in the bot\nUsage: !help `null or <command>`";
+        return "Shows the list with commands in the bot";
     }
 
     public String getUsage() {
-        return "!help null or <command>";
+        return "`!help null or <command>`";
     }
 
     public List<String> getAliases() {

@@ -1,4 +1,4 @@
-package com.error1223.jda.commandManage;
+package com.error1223.jda.type;
 
 import java.util.List;
 

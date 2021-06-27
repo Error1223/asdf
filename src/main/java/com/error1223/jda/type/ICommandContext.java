@@ -1,4 +1,4 @@
-package com.error1223.jda.commandManage;
+package com.error1223.jda.type;
 
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.JDA;

@@ -21,9 +21,11 @@ public class Listener extends ListenerAdapter {
         }
 
         //.env (default prefix = !)
-        String prefix = Config.get("prefix");
+        final long guildId = event.getGuild().getIdLong();
+        String prefix = PrefixManage.PREFIXES.computeIfAbsent(guildId, (id) -> Config.get("prefix"));
         String raw = event.getMessage().getContentRaw();
 
+        //shutdown
         if (raw.equalsIgnoreCase(prefix + "sd")
                 && user.getId().equals(Config.get("owner_id"))) {
             System.exit(0);
@@ -31,7 +33,7 @@ public class Listener extends ListenerAdapter {
         }
 
         if (raw.startsWith(prefix)) {
-            manager.handle(event);
+            manager.handle(event, prefix);
         }
     }
 }

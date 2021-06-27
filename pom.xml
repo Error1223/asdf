@@ -28,12 +28,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!--JDA, net.dv8tion-->
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.2.1_261</version>
+            <version>4.3.0_277</version>
         </dependency>
 
+        <!--youtube api, lavaplayer-->
         <dependency>
             <groupId>com.sedmelluq</groupId>
             <artifactId>lavaplayer</artifactId>
@@ -52,11 +54,46 @@
             <version>1.7.30</version>
         </dependency>
 
+        <!--.env file-->
         <dependency>
             <groupId>io.github.cdimascio</groupId>
             <artifactId>dotenv-java</artifactId>
             <version>2.2.0</version>
         </dependency>
+
+        <!--paste client provided by MenuDocs-->
+        <dependency>
+            <groupId>org.menudocs</groupId>
+            <artifactId>paste-client-java</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+        <!--JSON-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/club.minnced/discord-webhooks -->
+        <dependency>
+            <groupId>club.minnced</groupId>
+            <artifactId>discord-webhooks</artifactId>
+            <version>0.5.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>me.duncte123</groupId>
+            <artifactId>botCommons</artifactId>
+            <version>2.3.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -68,5 +105,13 @@
             <name>m2-dv8tion</name>
             <url>https://m2.dv8tion.net/releases</url>
         </repository>
+
+        <repository>
+            <id>jfrog-duncte123</id>
+            <name>jfrog-duncte123</name>
+            <url>https://duncte123.jfrog.io/artifactory/maven</url>
+        </repository>
+
+
     </repositories>
 </project>

@@ -1,7 +1,8 @@
-package com.error1223.jda.commandManage;
+package com.error1223.jda.type;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import com.error1223.jda.type.ICommandContext;
 
 import java.util.List;
 

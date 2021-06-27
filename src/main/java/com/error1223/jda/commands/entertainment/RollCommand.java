@@ -1,7 +1,7 @@
-package com.error1223.jda.commandManage.commands;
+package com.error1223.jda.commands.entertainment;
 
-import com.error1223.jda.commandManage.CommandContext;
-import com.error1223.jda.commandManage.ICommand;
+import com.error1223.jda.type.CommandContext;
+import com.error1223.jda.type.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
 
@@ -37,10 +37,10 @@ public class RollCommand implements ICommand {
         return "roll";
     }
     public String getHelp(){
-        return "randomly rolls a dice(1-6)\nUsage: `!roll`";
+        return "Randomly rolls a dice(1-6)";
     }
     public String getUsage(){
-        return "!roll";
+        return "`!roll`";
     }
 
 }
